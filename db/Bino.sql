@@ -9,13 +9,13 @@ CREATE TABLE "mentors" (
 );
 
 CREATE TABLE "bookings" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar(100),
   "email" varchar(84),
   "reserved_date" date,
   "reserved_time" date,
   "status" int,
-  "mentor_id" int PRIMARY KEY
+  "mentor_id" int
 );
 
 ALTER TABLE "bookings" ADD FOREIGN KEY ("mentor_id") REFERENCES "mentors" ("id");
