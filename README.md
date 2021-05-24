@@ -26,3 +26,6 @@ psql -U postgres -h 127.0.0.1 -p $POSTGRES_PORT binodb -f db/Bino.sql
 ```
 ## Run the Bot App
 
+```
+go run main.go
+```
