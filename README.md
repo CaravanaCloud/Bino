@@ -2,30 +2,31 @@
 
 The booking bot at your service
 
-# How to run 
+### Configure Database 
 
-## Start a PostgreSQL
+Create copy file
 
-```
-export POSTGRES_PASSWORD=Masterkey321
-export POSTGRES_DB=binodb
-export POSTGRES_PORT=5444
-export POSTGRES_CONTAINER=binopgsql
+```shell
+$ mv .env-sample .env.docker
 ```
 
-```
-docker run --rm --name $POSTGRES_CONTAINER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB \
-    -p 0.0.0.0:$POSTGRES_PORT:5432 \
-    -d postgres
+Run the command for import dump in `mysql`
+
+```shell
+$ docker exec -i binodb mysql -uroot -pdocker bino < ./db/Bino.sql
 ```
 
-```
-psql -U postgres -h 127.0.0.1 -p $POSTGRES_PORT binodb -f db/Bino.sql 
-```
-## Run the Bot App
+### Run the bino bot
 
+Execute this command for create container:
+
+```shell
+$ docker-compose run --service-ports --rm app bash
 ```
-go run main.go
+
+Inside container run the command for compile bino and run:
+
+```shell
+$ export BINO_DISCORD_TOKEN=''
+$ go run main.go
 ```
