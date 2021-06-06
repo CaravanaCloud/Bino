@@ -3,10 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
-	"syscall"
 	"strings"
+	"syscall"
+
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -26,24 +28,26 @@ func main() {
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
-		fmt.Println("error creating Discord session,", err)
+		log.Fatal("Error creating Discord session", err)
 		return
 	}
 
 	// Register the messageCreate func as a callback for MessageCreate events.
+	// Every time a message is created, func messaCreate is fired.
 	dg.AddHandler(messageCreate)
 
-	// In this example, we only care about receiving message events.
+	// Identify is sent during initial handshake with the discord gateway.
+	// In this case, will listen to group messages.
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
 	if err != nil {
-		fmt.Println("error opening connection,", err)
+		log.Fatal("error opening connection,", err)
 		return
 	}
 
-	// Wait here until CTRL-C or other term signal is received.
+	// Success.
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
@@ -58,15 +62,14 @@ func main() {
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but it's a good practice.
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
+
 	// If the message is "ping" reply with "Pong!"
 	toBino := strings.Contains(m.Content, "bino")
 	if toBino {
 		s.ChannelMessageSend(m.ChannelID, "E cilada bino!!!")
-		fmt.Println(m.Content)
 	}
 
 	// If the message is "pong" reply with "Ping!"
