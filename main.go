@@ -24,7 +24,7 @@ func init() {
 
 	err = Discord.Open()
 	if err != nil {
-		log.Fatal("We were unable to connect with discord. \n", err.Error())
+		log.Fatal("Error creating Discord session", err)
 	}
 
 	fmt.Println("Bot is now running. Press CTRL-C to exit.")
@@ -46,26 +46,25 @@ func main() {
 
 }
 
-func appointmentMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
+func appointmentMessage(session *discordgo.Session, message *discordgo.MessageCreate) {
 
 	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but it's a good practice.
-	if m.Author.ID == s.State.User.ID {
+	if message.Author.ID == session.State.User.ID {
 		return
 	}
 
-	fmt.Printf("%#v", m.Author)
+	fmt.Printf("%#v", message.Author)
 
 	// If the message is "ping" reply with "Pong!"
-	if m.Content == "agendar" {
-		if s.State.User.Email == "marcus.pereira@live.com" {
-			s.ChannelMessageSend(m.ChannelID, "Pong!")
+	if message.Content == "agendar" {
+		if session.State.User.Email == "marcus.pereira@live.com" {
+			session.ChannelMessageSend(message.ChannelID, "Pong!")
 		}
 	}
 
 	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	if message.Content == "pong" {
+		session.ChannelMessageSend(message.ChannelID, "Ping!")
 	}
 }
 
