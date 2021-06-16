@@ -54,21 +54,21 @@ func main() {
 
 // This function will be called (due to AddHandler above) every time a new
 // message is created on any channel that the authenticated bot has access to.
-func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+func messageCreate(session *discordgo.Session, message *discordgo.MessageCreate) {
 
 	// Ignore all messages created by the bot itself
-	if m.Author.ID == s.State.User.ID {
+	if message.Author.ID == session.State.User.ID {
 		return
 	}
 
 	// If the message is "ping" reply with "Pong!"
-	toBino := strings.Contains(m.Content, "bino")
+	toBino := strings.Contains(message.Content, "bino")
 	if toBino {
-		s.ChannelMessageSend(m.ChannelID, "E cilada bino!!!")
+		session.ChannelMessageSend(message.ChannelID, "E cilada bino!!!")
 	}
 
 	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	if message.Content == "pong" {
+		session.ChannelMessageSend(message.ChannelID, "Ping!")
 	}
 }
