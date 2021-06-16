@@ -29,22 +29,17 @@ func main() {
 	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
 		log.Fatal("Error creating Discord session", err)
-		return
 	}
 
 	// Register the messageCreate func as a callback for MessageCreate events.
-	// Every time a message is created, func messaCreate is fired.
 	dg.AddHandler(messageCreate)
 
-	// Identify is sent during initial handshake with the discord gateway.
-	// In this case, will listen to group messages.
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
 	if err != nil {
 		log.Fatal("error opening connection,", err)
-		return
 	}
 
 	// Success.
