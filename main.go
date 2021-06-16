@@ -1,70 +1,65 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-// Variables used for command line parameters
-var (
-	Token string
-)
+var Discord *discordgo.Session
 
 func init() {
+	var err error
 
-	flag.StringVar(&Token, "t", "", "Bot Token")
-	flag.Parse()
-}
+	token := "Bot " + os.Getenv("DISCORD_TOKEN")
 
-func main() {
+	Discord, err = discordgo.New(token)
+	if err != nil {
+		log.Fatal("Wrong Token. Please check the token before connect to Discord")
+	}
 
-	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + Token)
+	err = Discord.Open()
 	if err != nil {
 		log.Fatal("Error creating Discord session", err)
 	}
 
-	// Register the messageCreate func as a callback for MessageCreate events.
-	dg.AddHandler(messageCreate)
+	fmt.Println("Bot is now running. Press CTRL-C to exit.")
+}
 
-	dg.Identify.Intents = discordgo.IntentsGuildMessages
+func main() {
 
-	// Open a websocket connection to Discord and begin listening.
-	err = dg.Open()
-	if err != nil {
-		log.Fatal("error opening connection,", err)
-	}
+	Discord.AddHandler(appointmentMessage)
 
-	// Success.
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	// In this example, we only care about receiving message events.
+	Discord.Identify.Intents = discordgo.IntentsGuildMessages
+
+	// Wait here until CTRL-C or other term signal is received.
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
 
-	// Cleanly close down the Discord session.
-	dg.Close()
+	Discord.Close()
+
 }
 
-// This function will be called (due to AddHandler above) every time a new
-// message is created on any channel that the authenticated bot has access to.
-func messageCreate(session *discordgo.Session, message *discordgo.MessageCreate) {
+func appointmentMessage(session *discordgo.Session, message *discordgo.MessageCreate) {
 
 	// Ignore all messages created by the bot itself
 	if message.Author.ID == session.State.User.ID {
 		return
 	}
 
+	fmt.Printf("%#v", message.Author)
+
 	// If the message is "ping" reply with "Pong!"
-	toBino := strings.Contains(message.Content, "bino")
-	if toBino {
-		session.ChannelMessageSend(message.ChannelID, "E cilada bino!!!")
+	if message.Content == "agendar" {
+		if session.State.User.Email == "marcus.pereira@live.com" {
+			session.ChannelMessageSend(message.ChannelID, "Pong!")
+		}
 	}
 
 	// If the message is "pong" reply with "Ping!"
@@ -72,3 +67,17 @@ func messageCreate(session *discordgo.Session, message *discordgo.MessageCreate)
 		session.ChannelMessageSend(message.ChannelID, "Ping!")
 	}
 }
+
+// This function will be called (due to AddHandler above) every time a new
+// message is created on any channel that the authenticated bot has access to.
+// func appointmentMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
+// 	toBino := strings.Contains(m.Content, "agendamento")
+
+// 	if toBino && s.State.User.Email == "marcus.pereira@live.com" {
+// 		s.ChannelMessageSend(m.ChannelID, "E cilada bino!!!")
+// 		return
+// 	} else {
+// 		s.ChannelMessageSend(m.ChannelID, "Olá, somente mentores podem agendar mentorias. \nSeja um mentorado e marque a primeira conversa com a gente https://caravana.cloud/sessao-de-apresentacao")
+// 		return
+// 	}
+// }
