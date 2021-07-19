@@ -4,10 +4,10 @@ The booking bot at your service
 
 ### Configure Database 
 
-Create copy file
+Copy file `.env-sample` to `.env.docker`
 
 ```shell
-$ mv .env-sample .env.docker
+$ cp .env-sample .env.docker
 ```
 
 Run the command for import dump in `mysql`
@@ -24,7 +24,7 @@ Execute this command for create container:
 $ docker-compose run --service-ports --rm app bash
 ```
 
-Inside container run the command for compile bino and run:
+Inside container run the command export `BINO_DISCORD` variable and run application:
 
 ```shell
 $ export BINO_DISCORD_TOKEN=''
