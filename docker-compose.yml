@@ -8,14 +8,14 @@ services:
       - .:/go/src/app/bino
     working_dir: /go/src/app/bino
     #command: go run main.go
-    ports: 
+    ports:
       - "3000"
-    depends_on: 
+    depends_on:
       - db
   db:
     container_name: binodb
     image: mysql:8
     restart: always
     env_file: .env.docker
-    ports: 
+    ports:
       - 3306:3306
