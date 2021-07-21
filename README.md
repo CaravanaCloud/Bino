@@ -17,7 +17,7 @@ Execute this command for create container:
 docker-compose run --service-ports --rm app bash
 ```
 
-Inside container run the command export `BINO_DISCORD` variable and run application:
+Inside container run the command export `BINO_DISCORD_TOKEN` variable and run application:
 
 ```shell
 export BINO_DISCORD_TOKEN=''

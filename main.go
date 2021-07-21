@@ -15,7 +15,7 @@ var Discord *discordgo.Session
 func init() {
 	var err error
 
-	token := "Bot " + os.Getenv("DISCORD_TOKEN")
+	token := "Bot " + os.Getenv("BINO_DISCORD_TOKEN")
 
 	Discord, err = discordgo.New(token)
 	if err != nil {
