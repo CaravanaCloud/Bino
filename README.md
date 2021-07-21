@@ -2,7 +2,7 @@
 
 The booking bot at your service
 
-### Configure Database 
+### Configure Database
 
 Copy file `.env-sample` to `.env.docker`
 
