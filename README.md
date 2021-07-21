@@ -9,13 +9,6 @@ Copy file `.env-sample` to `.env.docker`
 ```shell
 cp .env-sample .env.docker
 ```
-
-Run the command for import dump in `mysql`
-
-```shell
-docker exec -i binodb mysql -uroot -pdocker bino < ./db/Bino.sql
-```
-
 ### Run the bino bot
 
 Execute this command for create container:

@@ -17,5 +17,7 @@ services:
     image: mysql:8
     restart: always
     env_file: .env.docker
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
