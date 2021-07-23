@@ -10,8 +10,6 @@ services:
     environment:
       - BINO_DISCORD_TOKEN
     command: go run main.go
-    ports:
-      - "3000"
     depends_on:
       - db
   db:
