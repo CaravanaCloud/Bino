@@ -2,9 +2,16 @@
 
 The booking bot at your service
 
+### Requirements
+
+- [Go](https://golang.org/) 1.16
+- [Docker](https://www.docker.com/)
+
 ### Configure Database
 
-Copy file `.env-sample` to `.env.docker`
+Both `MYSQL_ROOT_PASSWORD` and `MYSQL_DATABASE` are required to run the database. They are made available to the database via a file named `.env.docker`.
+
+For a quick setup you can copy `.env-sample`:
 
 ```shell
 cp .env-sample .env.docker
