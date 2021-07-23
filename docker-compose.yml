@@ -7,6 +7,8 @@ services:
     volumes:
       - .:/go/src/app/bino
     working_dir: /go/src/app/bino
+    environment:
+      - BINO_DISCORD_TOKEN
     #command: go run main.go
     ports:
       - "3000"
