@@ -4,7 +4,7 @@ The booking bot at your service
 ### Requirements
 
 - [Go](https://golang.org/) 1.16
-- [Docker](https://www.docker.com/)
+- [Docker](https://www.docker.com/) 18.06.0+
 
 ### Configure Database
 
