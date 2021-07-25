@@ -9,15 +9,6 @@ import (
 var supportedLanguages = []string{"en", "pt"}
 var bundle *i18n.Bundle
 
-func main() {
-	name := map[string]string{"Name": "Tester"}
-	msg_en, _ := Translate("test", "en", name)
-	msg_pt, _ := Translate("test", "pt", name)
-
-	println(msg_en)
-	println(msg_pt)
-}
-
 func init() {
 	bundle = i18n.NewBundle(language.Portuguese)
 	bundle.RegisterUnmarshalFunc("yml", yaml.Unmarshal)
