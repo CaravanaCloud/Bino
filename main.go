@@ -7,6 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
+	_ "github.com/CaravanaCloud/bino/db"
+
 	"github.com/bwmarrin/discordgo"
 )
 

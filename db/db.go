@@ -11,24 +11,25 @@ import (
 
 var DB *gorm.DB
 
-func SetupDB() {
-	var err error
+func init() {
+	name := os.Getenv("MYSQL_DATABASE")
+	host := os.Getenv("DB_HOST")
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
 
-  dsn := getDSN()
-  DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-
-	if err != nil {
-		log.Fatal("Error connecting to the database")
-	}
+	// Formats database connection string:
+	// username:password@protocol(address)/dbname?param=value
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, pass, host, name)
+	setupDB(dsn)
 }
 
-// username:password@protocol(address)/dbname?param=value
-// user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local
-func getDSN() string {
-	host := os.Getenv("DB_HOST")
-	name := os.Getenv("MYSQL_DATABASE")
-	user := os.Getenv("MYSQL_USER")
-	pass := os.Getenv("MYSQL_ROOT_PASSWORD")
+func setupDB(dsn string) {
+	var err error
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
-	return fmt.Sprintf("%s:%s@tcp(%s)/%s", user, pass, host, name)
+	if err != nil {
+		log.Fatalf("Cannot connect to database \n%s", err.Error())
+	}
+
+	print("ok")
 }
