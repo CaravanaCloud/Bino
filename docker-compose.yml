@@ -3,13 +3,12 @@ version: "3.7"
 services:
   app:
     container_name: bino
-    image: golang:1.16-buster
+    build: .
+    image: bino
     volumes:
-      - .:/go/src/app/bino
-    working_dir: /go/src/app/bino
+      - .:/app
     environment:
       - BINO_DISCORD_TOKEN
-    command: go run main.go
     depends_on:
       - db
   db:

@@ -48,3 +48,20 @@ Or using docker-compose via:
 ```shell
 docker-compose up
 ```
+
+#### Developing with Docker
+
+You may use Docker as a development environment. For that you can run:
+
+
+```shell
+docker-compose run --rm app bash
+```
+
+This will open a bash session inside a container with go pre-installed and all the dependencies already downloaded. It will also mount the current directory on the container so file changes on the host are reflected on the container.
+
+Just like on local development, the app can be started using:
+
+```shell
+go run main.go
+```
