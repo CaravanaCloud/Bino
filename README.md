@@ -39,7 +39,7 @@ go mod download
 
 You can run the app locally via
 
-```
+```shell
 go run main.go
 ```
 
