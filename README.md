@@ -1,32 +1,67 @@
 # Bino
 
 The booking bot at your service
+### Requirements
 
-### Configure Database 
+- [Go](https://golang.org/) 1.16
+- [Docker](https://www.docker.com/) 18.06.0+
 
-Copy file `.env-sample` to `.env.docker`
+### Configure Database
+
+Both `MYSQL_ROOT_PASSWORD` and `MYSQL_DATABASE` are required to run the database. They are made available to the database via a file named `.env.docker`.
+
+For a quick setup you can copy `.env-sample`:
 
 ```shell
-$ cp .env-sample .env.docker
+cp .env-sample .env.docker
 ```
-
-Run the command for import dump in `mysql`
-
-```shell
-$ docker exec -i binodb mysql -uroot -pdocker bino < ./db/Bino.sql
-```
-
 ### Run the bino bot
 
-Execute this command for create container:
+#### Setup Discord Token
+
+Bino needs to connect to a Discord server to run, so you'll need to provide a bot token. Check [WriteBots](https://writebots.com) great [tutorial](https://www.writebots.com/discord-bot-token/) to setup one.
+
+The token needs to be available via an environment variable named `BINO_DISCORD_TOKEN`. You can do it by running:
 
 ```shell
-$ docker-compose run --service-ports --rm app bash
+export BINO_DISCORD_TOKEN=<your_token_goes_here>
 ```
 
-Inside container run the command export `BINO_DISCORD` variable and run application:
+#### Install dependencies
+
+It can be done via:
 
 ```shell
-$ export BINO_DISCORD_TOKEN=''
-$ go run main.go
+go mod download
+```
+
+#### Run app
+
+You can run the app locally via
+
+```shell
+go run main.go
+```
+
+Or using docker-compose via:
+
+```shell
+docker-compose up
+```
+
+#### Developing with Docker
+
+You may use Docker as a development environment. For that you can run:
+
+
+```shell
+docker-compose run --rm app bash
+```
+
+This will open a bash session inside a container with go pre-installed and all the dependencies already downloaded. It will also mount the current directory on the container so file changes on the host are reflected on the container.
+
+Just like on local development, the app can be started using:
+
+```shell
+go run main.go
 ```

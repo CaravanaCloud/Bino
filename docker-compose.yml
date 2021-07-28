@@ -3,14 +3,13 @@ version: "3.7"
 services:
   app:
     container_name: bino
-    image: golang:1.16-buster
+    build: .
+    image: bino
     volumes:
-      - .:/go/src/app/bino
-    working_dir: /go/src/app/bino
-    # command: go run main.go
+      - .:/app
     env_file: .env.docker
-    ports:
-      - "3000"
+    environment:
+      - BINO_DISCORD_TOKEN
     depends_on:
       - db
   db:
@@ -18,5 +17,7 @@ services:
     image: mysql:8
     restart: always
     env_file: .env.docker
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
