@@ -13,12 +13,14 @@ var DB *gorm.DB
 
 func init() {
 	var err error
-	name := os.Getenv("MYSQL_DATABASE")
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	pass := os.Getenv("DB_PASS")
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, pass, host, name)
+	dsn := fmt.Sprintf(
+		"%s:%s@tcp(%s)/%s",
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASS"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("MYSQL_DATABASE"),
+	)
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
