@@ -1,0 +1,3 @@
+test:
+  description: "test message"
+  other: "Hello, {{.Name}}!"
