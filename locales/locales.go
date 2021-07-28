@@ -6,10 +6,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var supportedLanguages = []string{"en", "pt"}
 var bundle *i18n.Bundle
 
 func init() {
+	supportedLanguages := []string{"en", "pt"}
 	bundle = i18n.NewBundle(language.Portuguese)
 	bundle.RegisterUnmarshalFunc("yml", yaml.Unmarshal)
 
