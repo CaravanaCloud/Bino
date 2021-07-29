@@ -7,6 +7,7 @@ services:
     image: bino
     volumes:
       - .:/app
+    env_file: .env.docker
     environment:
       - BINO_DISCORD_TOKEN
     depends_on:
