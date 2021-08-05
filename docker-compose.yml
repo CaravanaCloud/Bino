@@ -12,7 +12,7 @@ services:
       - BINO_DISCORD_TOKEN
     depends_on:
       - db
-    command: bash -c "go mod download && go build -o bino && ./bino"
+    command: bash -c "go build -o bino && ./bino"
   db:
     container_name: binodb
     image: mysql:8
