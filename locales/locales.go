@@ -14,7 +14,7 @@ func init() {
 	bundle.RegisterUnmarshalFunc("yml", yaml.Unmarshal)
 
 	for _, lang := range(supportedLanguages) {
-		bundle.MustLoadMessageFile(lang + ".yml")
+		bundle.MustLoadMessageFile("locales/" + lang + ".yml")
 	}
 }
 

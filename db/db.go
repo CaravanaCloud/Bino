@@ -21,6 +21,8 @@ func init() {
 		os.Getenv("DB_HOST"),
 		os.Getenv("MYSQL_DATABASE"),
 	)
+	fmt.Printf(dsn)
+
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {

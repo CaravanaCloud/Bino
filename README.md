@@ -65,3 +65,14 @@ Just like on local development, the app can be started using:
 ```shell
 go run main.go
 ```
+
+### 
+
+docker run --rm \
+--name binodb \
+-p 0.0.0.0:3306:3306 \
+-e MYSQL_ROOT_PASSWORD="eciladabino" \
+-e MYSQL_DATABASE=binodb \
+-d mysql:8
+
+mysql -h127.0.0.1 -uroot -peciladabino binodb
