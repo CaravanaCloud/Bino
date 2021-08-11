@@ -35,3 +35,17 @@ func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
+
+func TestProcessListsAllMentors(t *testing.T) {
+	message := "mentorias"
+	mentors := Process(message)
+	expectedMentorList := `
+		- Lucia
+		- Julio
+		- Marcus
+	`
+
+	if mentors != expectedMentorList {
+		t.Fatalf("Expected mentors to be '%s', got: '%s'", expectedMentorList, mentors)
+	}
+}
