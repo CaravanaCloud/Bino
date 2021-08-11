@@ -38,14 +38,27 @@ func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
 
 func TestProcessListsAllMentors(t *testing.T) {
 	message := "mentorias"
-	mentors := Process(message)
+	mentors, err := Process(message)
 	expectedMentorList := `
 		- Lucia
 		- Julio
 		- Marcus
 	`
 
+	if err != nil {
+		t.Fatalf("Error processing '%s': %e", message, err)
+	}
+
 	if mentors != expectedMentorList {
 		t.Fatalf("Expected mentors to be '%s', got: '%s'", expectedMentorList, mentors)
+	}
+}
+
+func TestProcessShouldFailIfMessageCanNotBeHandled(t *testing.T) {
+	message := "ping"
+	_, err := Process(message)
+
+	if err == nil {
+		t.Fatalf("Expected error while processing '%s'", message)
 	}
 }
