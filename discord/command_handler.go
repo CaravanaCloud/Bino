@@ -7,10 +7,12 @@ import (
 
 const UNKOWN_COMMAND_MESSAGE = "Desculpa, não entendi o seu comando"
 
+var mentorshipCommand = commands.Mentorship{}
+
 func Handle(message *discordgo.MessageCreate) string {
 	messageContent := message.Content
-	if commands.CanHandle(messageContent) {
-		response, _ := commands.Process(messageContent)
+	if mentorshipCommand.CanHandle(messageContent) {
+		response, _ := mentorshipCommand.Process(messageContent)
 		return response
 	}
 	return UNKOWN_COMMAND_MESSAGE

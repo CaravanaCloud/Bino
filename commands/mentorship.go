@@ -8,12 +8,14 @@ import (
 	mentors "github.com/CaravanaCloud/bino/mentors"
 )
 
-func CanHandle(message string) bool {
+type Mentorship struct{}
+
+func (m Mentorship) CanHandle(message string) bool {
 	return strings.TrimSpace(message) == "mentorias"
 }
 
-func Process(message string) (string, error) {
-	if !CanHandle(message) {
+func (m Mentorship) Process(message string) (string, error) {
+	if !m.CanHandle(message) {
 		return "", fmt.Errorf("Can't process message '%s'", message)
 	}
 

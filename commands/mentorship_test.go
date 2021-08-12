@@ -6,39 +6,45 @@ import (
 
 func TestCanHandleListAllMentorsMessage(t *testing.T) {
 	message := "mentorias"
+	command := Mentorship{}
 
-	if !CanHandle(message) {
+	if !command.CanHandle(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
 func TestCanHandleListAllMessagesWithTraillingSpaces(t *testing.T) {
 	message := "mentorias        "
+	command := Mentorship{}
 
-	if !CanHandle(message) {
+	if !command.CanHandle(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
 func TestCanNotHandleOtherKindOfMessages(t *testing.T) {
 	message := "ping"
+	command := Mentorship{}
 
-	if CanHandle(message) {
+	if command.CanHandle(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
 func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
 	message := "ping mentorias"
+	command := Mentorship{}
 
-	if CanHandle(message) {
+	if command.CanHandle(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
 func TestProcessListsAllMentors(t *testing.T) {
 	message := "mentorias"
-	mentors, err := Process(message)
+	command := Mentorship{}
+
+	mentors, err := command.Process(message)
 	expectedMentorList := "- Lucia\n- Julio\n- Marcus\n"
 
 	if err != nil {
@@ -52,7 +58,9 @@ func TestProcessListsAllMentors(t *testing.T) {
 
 func TestProcessShouldFailIfMessageCanNotBeHandled(t *testing.T) {
 	message := "ping"
-	_, err := Process(message)
+	command := Mentorship{}
+
+	_, err := command.Process(message)
 
 	if err == nil {
 		t.Fatalf("Expected error while processing '%s'", message)
