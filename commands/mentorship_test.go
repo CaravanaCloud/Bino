@@ -39,11 +39,7 @@ func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
 func TestProcessListsAllMentors(t *testing.T) {
 	message := "mentorias"
 	mentors, err := Process(message)
-	expectedMentorList := `
-		- Lucia
-		- Julio
-		- Marcus
-	`
+	expectedMentorList := "- Lucia\n- Julio\n- Marcus\n"
 
 	if err != nil {
 		t.Fatalf("Error processing '%s': %e", message, err)
