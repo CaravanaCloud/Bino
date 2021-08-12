@@ -1,10 +1,15 @@
 package discord
 
-import "github.com/bwmarrin/discordgo"
+import (
+	"github.com/CaravanaCloud/bino/commands"
+	"github.com/bwmarrin/discordgo"
+)
 
 func Handle(message *discordgo.MessageCreate) string {
-	if message.Content == "mentorias" {
-		return "- Lucia\n- Julio\n- Marcus\n"
+	messageContent := message.Content
+	if commands.CanHandle(messageContent) {
+		response, _ := commands.Process(messageContent)
+		return response
 	}
 	return "Desculpa, não entendi o seu comando"
 }
