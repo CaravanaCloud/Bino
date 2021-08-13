@@ -8,16 +8,15 @@ import (
 
 func TestHandlesMentorshipCommandFromDiscordMessage(t *testing.T) {
 	message := messageFromDiscordWith("mentorias")
-	response := Handle(message)
+	response := processMessage(message)
 	expectedResponse := "- Lucia\n- Julio\n- Marcus\n"
 	if response != expectedResponse {
 		t.Fatalf("Expected message with content '%v' to be handled sucessfully", message.Content)
 	}
 }
-
 func TestHandlesUnknownCommand(t *testing.T) {
 	message := messageFromDiscordWith("unknown")
-	response := Handle(message)
+	response := processMessage(message)
 	expectedResponse := "Desculpa, não entendi o seu comando"
 	if response != expectedResponse {
 		t.Fatalf("Expected message with content '%v' to be handled sucessfully", message.Content)
