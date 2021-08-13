@@ -9,8 +9,13 @@ const UNKOWN_COMMAND_MESSAGE = "Desculpa, não entendi o seu comando"
 
 var mentorshipCommand = commands.Mentorship{}
 
-func processMessage(message *discordgo.MessageCreate) string {
-	messageContent := message.Content
+func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
+	response := processMessage(message.Content)
+	session.ChannelMessageSend(message.ChannelID, response)
+
+}
+
+func processMessage(messageContent string) string {
 	if mentorshipCommand.CanHandle(messageContent) {
 		response, _ := mentorshipCommand.Process(messageContent)
 		return response
