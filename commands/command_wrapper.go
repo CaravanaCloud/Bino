@@ -1,12 +1,12 @@
 package commands
 
-type commandRunner interface {
-	CanRun(message string) bool
-	Run(message string) (string, error)
+type command struct {
+	CanRun func(message string) bool
+	Run    func(message string) (string, error)
 }
 
 type CommandWrapper struct {
-	Command commandRunner
+	Command command
 }
 
 func (w CommandWrapper) CanRun(message string) bool {
