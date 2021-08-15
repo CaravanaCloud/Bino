@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestHandlesMentorshipCommandFromDiscordMessage(t *testing.T) {
+func TestCommandMessageHandlerListsMentorships(t *testing.T) {
 	message := "mentorias"
 	response := processMessage(message)
 	expectedResponse := "- Lucia\n- Julio\n- Marcus\n"
@@ -12,7 +12,7 @@ func TestHandlesMentorshipCommandFromDiscordMessage(t *testing.T) {
 		t.Fatalf("Expected message with content '%v' to be handled sucessfully", message)
 	}
 }
-func TestHandlesUnknownCommand(t *testing.T) {
+func TestCommandMessageHandlerNotifiesUserIfCommandIsUnknown(t *testing.T) {
 	message := "unknown"
 	response := processMessage(message)
 	expectedResponse := "Desculpa, não entendi o seu comando"
