@@ -5,9 +5,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const unknownCommandMessage = "Desculpa, não entendi o seu comando"
-const commandErrorMessage = "Desculpa, houve um erro no com seu comando"
-
 var bino = Init(commands.Mentorship)
 
 func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
