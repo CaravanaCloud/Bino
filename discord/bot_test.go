@@ -27,7 +27,7 @@ func TestProcessMentorship(t *testing.T) {
 	response := bot.Process(message)
 
 	if response != expectedResponse {
-		t.Errorf("Expected process to responde with '%s', but got: %s", expectedResponse, response)
+		t.Fatalf("Expected process to responde with '%s', but got: %s", expectedResponse, response)
 	}
 }
 
@@ -45,7 +45,7 @@ func TestProcessMentorshipIgnoringCase(t *testing.T) {
 	response := bot.Process(message)
 
 	if response != expectedResponse {
-		t.Errorf("Expected process to responde with '%s', but got: %s", expectedResponse, response)
+		t.Fatalf("Expected process to responde with '%s', but got: %s", expectedResponse, response)
 	}
 }
 
@@ -63,7 +63,7 @@ func TestProcessRespondsWithUserFriendlyMessageIfCaseOfError(t *testing.T) {
 	response := bot.Process(message)
 
 	if response != expectedErrorMessage {
-		t.Errorf("Expected process to responde with '%s', got: %s", expectedErrorMessage, response)
+		t.Fatalf("Expected process to responde with '%s', got: %s", expectedErrorMessage, response)
 	}
 }
 
@@ -81,6 +81,6 @@ func TestProcessUnknownWithMessage(t *testing.T) {
 	response := bot.Process(message)
 
 	if response != expectedResponse {
-		t.Errorf("Expected process to responde with '%s' , got: %s", expectedResponse, response)
+		t.Fatalf("Expected process to responde with '%s' , got: %s", expectedResponse, response)
 	}
 }
