@@ -4,20 +4,20 @@ import (
 	"testing"
 )
 
-func TestCanHandleListAllMentorsMessage(t *testing.T) {
+func TestCanProcessListAllMentorsMessage(t *testing.T) {
 	message := "mentorias"
 	command := Mentorship{}
 
-	if !command.CanHandle(message) {
+	if !command.CanProcess(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
-func TestCanHandleListAllMessagesWithTraillingSpaces(t *testing.T) {
+func TestCanProcessListAllMessagesWithTraillingSpaces(t *testing.T) {
 	message := "mentorias        "
 	command := Mentorship{}
 
-	if !command.CanHandle(message) {
+	if !command.CanProcess(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
@@ -26,7 +26,7 @@ func TestCanNotHandleOtherKindOfMessages(t *testing.T) {
 	message := "ping"
 	command := Mentorship{}
 
-	if command.CanHandle(message) {
+	if command.CanProcess(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
@@ -35,7 +35,7 @@ func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
 	message := "ping mentorias"
 	command := Mentorship{}
 
-	if command.CanHandle(message) {
+	if command.CanProcess(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }

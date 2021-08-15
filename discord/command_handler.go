@@ -23,7 +23,7 @@ func messageIsFromBotItself(session *discordgo.Session, message *discordgo.Messa
 }
 
 func processMessage(messageContent string) string {
-	if mentorshipCommand.CanHandle(messageContent) {
+	if mentorshipCommand.CanProcess(messageContent) {
 		response, _ := mentorshipCommand.Process(messageContent)
 		return response
 	}
