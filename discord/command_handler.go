@@ -5,13 +5,19 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const UNKOWN_COMMAND_MESSAGE = "Desculpa, não entendi o seu comando"
+const unknownCommandMessage = "Desculpa, não entendi o seu comando"
+const commandErrorMessage = "Desculpa, houve um erro no com seu comando"
 
 func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	if messageIsFromBotItself(session, message) {
 		return
 	}
-	response := processMessage(message.Content)
+
+	response, err := processMessage(message.Content)
+	if err != nil {
+		session.ChannelMessageSend(message.ChannelID, commandErrorMessage)
+	}
+
 	session.ChannelMessageSend(message.ChannelID, response)
 
 }
@@ -20,10 +26,9 @@ func messageIsFromBotItself(session *discordgo.Session, message *discordgo.Messa
 	return message.Author.ID == session.State.User.ID
 }
 
-func processMessage(message string) string {
+func processMessage(message string) (string, error) {
 	if message == "mentorias" {
-		response, _ := commands.Mentorship.Run(message)
-		return response
+		return commands.Mentorship.Run(message)
 	}
-	return UNKOWN_COMMAND_MESSAGE
+	return unknownCommandMessage, nil
 }
