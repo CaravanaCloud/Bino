@@ -55,14 +55,3 @@ func TestRunListsAllMentors(t *testing.T) {
 		t.Fatalf("Expected mentors to be '%s', got: '%s'", expectedMentorList, mentors)
 	}
 }
-
-func TestRunShouldFailIfMessageCanNotBeHandled(t *testing.T) {
-	message := "ping"
-	command := Mentorship
-
-	_, err := command.Run(message)
-
-	if err == nil {
-		t.Fatalf("Expected error while processing '%s'", message)
-	}
-}

@@ -2,7 +2,6 @@ package commands
 
 import (
 	"bytes"
-	"fmt"
 	"strings"
 
 	mentors "github.com/CaravanaCloud/bino/mentors"
@@ -20,10 +19,6 @@ func canRun(message string) bool {
 }
 
 func run(message string) (string, error) {
-	if !canRun(message) {
-		return "", fmt.Errorf("Can't process message '%s'", message)
-	}
-
 	return asTextList(mentors.List()), nil
 }
 
