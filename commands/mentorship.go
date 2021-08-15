@@ -2,7 +2,6 @@ package commands
 
 import (
 	"bytes"
-	"strings"
 
 	mentors "github.com/CaravanaCloud/bino/mentors"
 )
@@ -17,7 +16,7 @@ var Mentorship = CommandWrapper{
 }
 
 func canRun(message string) bool {
-	return strings.TrimSpace(message) == "mentorias"
+	return message == "mentorias"
 }
 
 func run(message string) (string, error) {

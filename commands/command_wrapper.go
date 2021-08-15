@@ -1,6 +1,9 @@
 package commands
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type command struct {
 	CanRun func(message string) bool
@@ -12,7 +15,7 @@ type CommandWrapper struct {
 }
 
 func (w CommandWrapper) Run(message string) (string, error) {
-	if !w.Command.CanRun(message) {
+	if !w.Command.CanRun(strings.TrimSpace(message)) {
 		return "Execution failed", fmt.Errorf("Command can not be executed for message: %s", message)
 	}
 	return w.Command.Run(message)

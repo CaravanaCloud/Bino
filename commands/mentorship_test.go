@@ -12,14 +12,6 @@ func TestCanRunListAllMentorsMessage(t *testing.T) {
 	}
 }
 
-func TestCanRunListAllMessagesWithTraillingSpaces(t *testing.T) {
-	message := "mentorias        "
-
-	if !mentorshipCommand.CanRun(message) {
-		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
-	}
-}
-
 func TestCanNotRunOtherKindOfMessages(t *testing.T) {
 	message := "ping"
 
