@@ -8,6 +8,8 @@ import (
 const unknownCommandMessage = "Desculpa, não entendi o seu comando"
 const commandErrorMessage = "Desculpa, houve um erro no com seu comando"
 
+var bino = Init(commands.Mentorship)
+
 func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	if messageIsFromBotItself(session, message) {
 		return
@@ -27,8 +29,5 @@ func messageIsFromBotItself(session *discordgo.Session, message *discordgo.Messa
 }
 
 func processMessage(message string) (string, error) {
-	if message == "mentorias" {
-		return commands.Mentorship.Run(message)
-	}
-	return unknownCommandMessage, nil
+	return bino.Process(message), nil
 }
