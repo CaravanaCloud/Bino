@@ -10,21 +10,21 @@ type Runner interface {
 }
 
 type bot struct {
-	memtorship Runner
+	mentorship Runner
 }
 
 const unknownCommandMessage = "Desculpa, não entendi o seu comando"
 const commandErrorMessage = "Desculpa, houve um erro no com seu comando"
 
-func Init(memtorship Runner) bot {
+func Init(mentorship Runner) bot {
 	return bot{
-		memtorship: memtorship,
+		mentorship: mentorship,
 	}
 }
 
 func (b bot) Process(message string) string {
 	if strings.EqualFold(message, "mentorias") {
-		response, err := b.memtorship.Run(message)
+		response, err := b.mentorship.Run(message)
 		if err != nil {
 			fmt.Printf("Error while responding to membership message: %e", err)
 			return commandErrorMessage
