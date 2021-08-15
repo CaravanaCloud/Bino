@@ -4,47 +4,47 @@ import (
 	"testing"
 )
 
-func TestCanProcessListAllMentorsMessage(t *testing.T) {
+func TestCanRunListAllMentorsMessage(t *testing.T) {
 	message := "mentorias"
 	command := Mentorship{}
 
-	if !command.CanProcess(message) {
+	if !command.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
-func TestCanProcessListAllMessagesWithTraillingSpaces(t *testing.T) {
+func TestCanRunListAllMessagesWithTraillingSpaces(t *testing.T) {
 	message := "mentorias        "
 	command := Mentorship{}
 
-	if !command.CanProcess(message) {
+	if !command.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
-func TestCanNotHandleOtherKindOfMessages(t *testing.T) {
+func TestCanNotRunOtherKindOfMessages(t *testing.T) {
 	message := "ping"
 	command := Mentorship{}
 
-	if command.CanProcess(message) {
+	if command.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
-func TestCanNotHandleMessagesWithMultipleWords(t *testing.T) {
+func TestCanNotRunMessagesWithMultipleWords(t *testing.T) {
 	message := "ping mentorias"
 	command := Mentorship{}
 
-	if command.CanProcess(message) {
+	if command.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
-func TestProcessListsAllMentors(t *testing.T) {
+func TestRunListsAllMentors(t *testing.T) {
 	message := "mentorias"
 	command := Mentorship{}
 
-	mentors, err := command.Process(message)
+	mentors, err := command.Run(message)
 	expectedMentorList := "- Lucia\n- Julio\n- Marcus\n"
 
 	if err != nil {
@@ -56,11 +56,11 @@ func TestProcessListsAllMentors(t *testing.T) {
 	}
 }
 
-func TestProcessShouldFailIfMessageCanNotBeHandled(t *testing.T) {
+func TestRunShouldFailIfMessageCanNotBeHandled(t *testing.T) {
 	message := "ping"
 	command := Mentorship{}
 
-	_, err := command.Process(message)
+	_, err := command.Run(message)
 
 	if err == nil {
 		t.Fatalf("Expected error while processing '%s'", message)

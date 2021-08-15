@@ -23,8 +23,8 @@ func messageIsFromBotItself(session *discordgo.Session, message *discordgo.Messa
 }
 
 func processMessage(messageContent string) string {
-	if mentorshipCommand.CanProcess(messageContent) {
-		response, _ := mentorshipCommand.Process(messageContent)
+	if mentorshipCommand.CanRun(messageContent) {
+		response, _ := mentorshipCommand.Run(messageContent)
 		return response
 	}
 	return UNKOWN_COMMAND_MESSAGE

@@ -10,12 +10,12 @@ import (
 
 type Mentorship struct{}
 
-func (m Mentorship) CanProcess(message string) bool {
+func (m Mentorship) CanRun(message string) bool {
 	return strings.TrimSpace(message) == "mentorias"
 }
 
-func (m Mentorship) Process(message string) (string, error) {
-	if !m.CanProcess(message) {
+func (m Mentorship) Run(message string) (string, error) {
+	if !m.CanRun(message) {
 		return "", fmt.Errorf("Can't process message '%s'", message)
 	}
 

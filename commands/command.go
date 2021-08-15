@@ -1,6 +1,6 @@
 package commands
 
-type Command interface {
-	CanProcess(message string) bool
-	Process(message string) (string, error)
+type CommandRunner interface {
+	CanRun(message string) bool
+	Run(message string) (string, error)
 }
