@@ -6,7 +6,7 @@ import (
 
 func TestCanRunListAllMentorsMessage(t *testing.T) {
 	message := "mentorias"
-	command := Mentorship{}
+	command := Mentorship
 
 	if !command.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
@@ -15,7 +15,7 @@ func TestCanRunListAllMentorsMessage(t *testing.T) {
 
 func TestCanRunListAllMessagesWithTraillingSpaces(t *testing.T) {
 	message := "mentorias        "
-	command := Mentorship{}
+	command := Mentorship
 
 	if !command.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
@@ -24,7 +24,7 @@ func TestCanRunListAllMessagesWithTraillingSpaces(t *testing.T) {
 
 func TestCanNotRunOtherKindOfMessages(t *testing.T) {
 	message := "ping"
-	command := Mentorship{}
+	command := Mentorship
 
 	if command.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
@@ -33,7 +33,7 @@ func TestCanNotRunOtherKindOfMessages(t *testing.T) {
 
 func TestCanNotRunMessagesWithMultipleWords(t *testing.T) {
 	message := "ping mentorias"
-	command := Mentorship{}
+	command := Mentorship
 
 	if command.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
@@ -42,7 +42,7 @@ func TestCanNotRunMessagesWithMultipleWords(t *testing.T) {
 
 func TestRunListsAllMentors(t *testing.T) {
 	message := "mentorias"
-	command := Mentorship{}
+	command := Mentorship
 
 	mentors, err := command.Run(message)
 	expectedMentorList := "- Lucia\n- Julio\n- Marcus\n"
@@ -58,7 +58,7 @@ func TestRunListsAllMentors(t *testing.T) {
 
 func TestRunShouldFailIfMessageCanNotBeHandled(t *testing.T) {
 	message := "ping"
-	command := Mentorship{}
+	command := Mentorship
 
 	_, err := command.Run(message)
 

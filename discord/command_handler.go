@@ -7,7 +7,7 @@ import (
 
 const UNKOWN_COMMAND_MESSAGE = "Desculpa, não entendi o seu comando"
 
-var mentorshipCommand = commands.Mentorship{}
+var mentorshipCommand = commands.Mentorship
 
 func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	if messageIsFromBotItself(session, message) {
