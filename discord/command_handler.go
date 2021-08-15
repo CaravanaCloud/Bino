@@ -7,8 +7,6 @@ import (
 
 const UNKOWN_COMMAND_MESSAGE = "Desculpa, não entendi o seu comando"
 
-var mentorshipCommand = commands.Mentorship
-
 func CommandMessageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	if messageIsFromBotItself(session, message) {
 		return
@@ -22,9 +20,9 @@ func messageIsFromBotItself(session *discordgo.Session, message *discordgo.Messa
 	return message.Author.ID == session.State.User.ID
 }
 
-func processMessage(messageContent string) string {
-	if mentorshipCommand.CanRun(messageContent) {
-		response, _ := mentorshipCommand.Run(messageContent)
+func processMessage(message string) string {
+	if message == "mentorias" {
+		response, _ := commands.Mentorship.Run(message)
 		return response
 	}
 	return UNKOWN_COMMAND_MESSAGE
