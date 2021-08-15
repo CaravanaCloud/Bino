@@ -12,19 +12,11 @@ func CommandMessageHandler(session *discordgo.Session, message *discordgo.Messag
 		return
 	}
 
-	response, err := processMessage(message.Content)
-	if err != nil {
-		session.ChannelMessageSend(message.ChannelID, commandErrorMessage)
-	}
+	response := bino.Process(message.Content)
 
 	session.ChannelMessageSend(message.ChannelID, response)
-
 }
 
 func messageIsFromBotItself(session *discordgo.Session, message *discordgo.MessageCreate) bool {
 	return message.Author.ID == session.State.User.ID
-}
-
-func processMessage(message string) (string, error) {
-	return bino.Process(message), nil
 }
