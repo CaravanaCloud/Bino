@@ -7,11 +7,13 @@ import (
 	mentors "github.com/CaravanaCloud/bino/mentors"
 )
 
+var mentorshipCommand = command{
+	CanRun: canRun,
+	Run:    run,
+}
+
 var Mentorship = CommandWrapper{
-	Command: command{
-		CanRun: canRun,
-		Run:    run,
-	},
+	Command: mentorshipCommand,
 }
 
 func canRun(message string) bool {

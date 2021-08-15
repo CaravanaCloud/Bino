@@ -11,10 +11,6 @@ type CommandWrapper struct {
 	Command command
 }
 
-func (w CommandWrapper) CanRun(message string) bool {
-	return w.Command.CanRun(message)
-}
-
 func (w CommandWrapper) Run(message string) (string, error) {
 	if !w.Command.CanRun(message) {
 		return "Execution failed", fmt.Errorf("Command can not be executed for message: %s", message)

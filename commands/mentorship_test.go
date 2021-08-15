@@ -6,45 +6,40 @@ import (
 
 func TestCanRunListAllMentorsMessage(t *testing.T) {
 	message := "mentorias"
-	command := Mentorship
 
-	if !command.CanRun(message) {
+	if !mentorshipCommand.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
 func TestCanRunListAllMessagesWithTraillingSpaces(t *testing.T) {
 	message := "mentorias        "
-	command := Mentorship
 
-	if !command.CanRun(message) {
+	if !mentorshipCommand.CanRun(message) {
 		t.Fatalf("Expected mentorship to be able to handle message '%s'", message)
 	}
 }
 
 func TestCanNotRunOtherKindOfMessages(t *testing.T) {
 	message := "ping"
-	command := Mentorship
 
-	if command.CanRun(message) {
+	if mentorshipCommand.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
 func TestCanNotRunMessagesWithMultipleWords(t *testing.T) {
 	message := "ping mentorias"
-	command := Mentorship
 
-	if command.CanRun(message) {
+	if mentorshipCommand.CanRun(message) {
 		t.Fatalf("Expected mentorship to not handle message '%s'", message)
 	}
 }
 
 func TestRunListsAllMentors(t *testing.T) {
 	message := "mentorias"
-	command := Mentorship
 
-	mentors, err := command.Run(message)
+	mentors, err := mentorshipCommand.Run(message)
 	expectedMentorList := "- Lucia\n- Julio\n- Marcus\n"
 
 	if err != nil {
