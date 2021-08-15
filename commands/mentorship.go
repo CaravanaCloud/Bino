@@ -11,7 +11,7 @@ var mentorshipCommand = command{
 	Run:    run,
 }
 
-var Mentorship = CommandWrapper{
+var Mentorship = CommandRunner{
 	Command: mentorshipCommand,
 }
 

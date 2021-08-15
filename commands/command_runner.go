@@ -10,11 +10,11 @@ type command struct {
 	Run    func(message string) (string, error)
 }
 
-type CommandWrapper struct {
+type CommandRunner struct {
 	Command command
 }
 
-func (w CommandWrapper) Run(message string) (string, error) {
+func (w CommandRunner) Run(message string) (string, error) {
 	if !w.Command.CanRun(strings.TrimSpace(message)) {
 		return "Execution failed", fmt.Errorf("Command can not be executed for message: %s", message)
 	}

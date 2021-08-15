@@ -7,7 +7,7 @@ import (
 func TestRunFailsIfCommandCantRun(t *testing.T) {
 	message := "any message"
 
-	wrapper := CommandWrapper{
+	runner := CommandRunner{
 		Command: command{
 			CanRun: func(message string) bool {
 				return false
@@ -18,7 +18,7 @@ func TestRunFailsIfCommandCantRun(t *testing.T) {
 		},
 	}
 
-	_, err := wrapper.Run(message)
+	_, err := runner.Run(message)
 
 	if err == nil {
 		t.Fatal("Expected run to error but it didn't")
@@ -28,7 +28,7 @@ func TestRunFailsIfCommandCantRun(t *testing.T) {
 func TestRunIgnoresAnyTraillingWhiteSpacesOnMessage(t *testing.T) {
 	message := "testMessage        "
 
-	wrapper := CommandWrapper{
+	runner := CommandRunner{
 		Command: command{
 			CanRun: func(message string) bool {
 				return message == "testMessage"
@@ -39,7 +39,7 @@ func TestRunIgnoresAnyTraillingWhiteSpacesOnMessage(t *testing.T) {
 		},
 	}
 
-	_, err := wrapper.Run(message)
+	_, err := runner.Run(message)
 
 	if err != nil {
 		t.Fatalf("Expected message '%s' to be acccepted", message)
