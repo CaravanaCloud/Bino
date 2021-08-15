@@ -19,13 +19,9 @@ func canRun(message string) bool {
 }
 
 func run(message string) (string, error) {
-	return asTextList(mentors.List()), nil
-}
-
-func asTextList(mentors []mentors.Mentor) string {
 	var stringBuffer bytes.Buffer
-	for _, mentor := range mentors {
+	for _, mentor := range mentors.List() {
 		stringBuffer.WriteString("- " + mentor.Name + "\n")
 	}
-	return stringBuffer.String()
+	return stringBuffer.String(), nil
 }
