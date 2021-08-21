@@ -1,7 +1,7 @@
 package discord
 
 import (
-	"fmt"
+	"log"
 	"strings"
 )
 
@@ -26,7 +26,7 @@ func (b bot) Process(message string) string {
 	if strings.EqualFold(message, "mentorias") {
 		response, err := b.mentorship.Run(message)
 		if err != nil {
-			fmt.Printf("Error while responding to membership message: %e", err)
+			log.Fatalf("Error while responding to membership message: %e", err)
 			return commandErrorMessage
 		}
 		return response
