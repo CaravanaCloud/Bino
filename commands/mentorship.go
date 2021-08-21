@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"bytes"
+	"fmt"
 
 	mentors "github.com/CaravanaCloud/bino/mentors"
 )
@@ -19,10 +19,9 @@ func canRun(message string) bool {
 	return message == "mentorias"
 }
 
-func run(message string) (string, error) {
-	var stringBuffer bytes.Buffer
+func run(message string) (mentorsList string, err error) {
 	for _, mentor := range mentors.List() {
-		stringBuffer.WriteString("- " + mentor.Name + "\n")
+		mentorsList = fmt.Sprintf("%s- %s\n", mentorsList, mentor.Name)
 	}
-	return stringBuffer.String(), nil
+	return
 }
