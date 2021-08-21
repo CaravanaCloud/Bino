@@ -35,6 +35,14 @@ It can be done via:
 go mod download
 ```
 
+#### Running tests
+
+Make sure that everything is working as expected by running the following command on the root directory:
+
+```shell
+go test ./...
+```
+
 #### Run app
 
 You can run the app locally via
@@ -66,7 +74,7 @@ Just like on local development, the app can be started using:
 go run main.go
 ```
 
-### 
+###
 
 docker run --rm \
 --name binodb \
