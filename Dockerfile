@@ -1,4 +1,4 @@
-FROM golang:1.16-buster
+FROM golang:1.20-buster
 WORKDIR /app
 COPY . /app
 RUN go mod download && go build -o bino
